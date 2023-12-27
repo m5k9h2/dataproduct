@@ -20,7 +20,7 @@ app = Dash(__name__)
 app.layout = html.Div([
     html.Div(children='App with Data, Graph, and Controls'),
     html.Hr(),
-    dcc.RadioItems(options=['High', 'Close', 'Low'], value='High', id='controls-and-radio-item'),
+    dcc.RadioItems(options=['High', 'Close', 'Low'], value='Close', id='controls-and-radio-item'),
     dash_table.DataTable(data=df.to_dict('records'), page_size=6),
     dcc.Graph(figure={}, id='controls-and-graph')
 ])
@@ -31,7 +31,7 @@ app.layout = html.Div([
     Input(component_id='controls-and-radio-item', component_property='value')
 )
 def update_graph(col_chosen):
-    fig = px.line(df, x='volume', y=col_chosen)
+    fig = px.line(df, x='Date', y=col_chosen)
     return fig
 
 # Run the app
